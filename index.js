@@ -9,6 +9,12 @@ const cfg = {
 // Express initiation
 const app = express()
 
+// log every request ot the terminal
+app.use((req, res, next) => {
+  console.log(req.url)
+  next()
+})
+
 // Home page route
 app.get('/', (req, res) => {
   res.send('Hellow Enn')
@@ -18,6 +24,9 @@ app.get('/', (req, res) => {
 app.get('/hello/', (req, res) => {
   res.send('Hello again!')
 })
+
+// Serve static assets
+app.use(express.static('static'))
 
 // Start server
 app.listen(cfg.port, () => {
