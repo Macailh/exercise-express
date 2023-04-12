@@ -33,11 +33,6 @@ app.use((req, res, next) => {
 // HTTP compression
 app.use(compression())
 
-// 404 error
-app.use((req, res) => {
-  res.status(404).send('Not found')
-})
-
 // Home page route
 app.get('/', (req, res) => {
   res.send('Hellow Enn')
@@ -50,6 +45,11 @@ app.get('/hello/', (req, res) => {
 
 // Serve static assets
 app.use(express.static(cfg.dir.static))
+
+// 404 error
+app.use((req, res) => {
+  res.status(404).send('Not found')
+})
 
 // Start server
 app.listen(cfg.port, () => {
