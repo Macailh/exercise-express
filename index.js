@@ -1,5 +1,6 @@
 // Express application
 import express from 'express'
+import compression from 'compression'
 
 import { fileURLToPath } from 'url'
 import { dirname, sep } from 'path'
@@ -25,6 +26,9 @@ app.use((req, res, next) => {
   console.log(req.url)
   next()
 })
+
+// HTTP compression
+app.use(compression())
 
 // Home page route
 app.get('/', (req, res) => {
