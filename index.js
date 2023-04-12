@@ -21,6 +21,9 @@ console.dir(cfg, { depth: null, color: true })
 // Express initiation
 const app = express()
 
+// do not identify Express
+app.disable('x-powered-by')
+
 // log every request ot the terminal
 app.use((req, res, next) => {
   console.log(req.url)
