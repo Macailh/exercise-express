@@ -48,6 +48,12 @@ app.get('/hello/', (req, res) => {
   res.render('message', { title: 'Hello again!' })
 })
 
+// Params route
+app.get('/user/:id', (req, res) => {
+  const id = req.params.id
+  res.render('message', { title: id })
+})
+
 // Serve static assets
 app.use(express.static(cfg.dir.static))
 
