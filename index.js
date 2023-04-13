@@ -50,8 +50,15 @@ app.get('/hello/', (req, res) => {
 
 // Params route
 app.get('/user/:id', (req, res) => {
-  const id = req.params.id
-  res.render('message', { title: id })
+  res.render('message', { title: `${req.params.id}` })
+})
+
+// return a value for a user
+app.get('/author/:name/book/:bookName', (req, res, next) => {
+  console.log(`author: ${req.params.name}`)
+  console.log(`author: ${req.params.bookName}`)
+
+  next()
 })
 
 // Serve static assets
