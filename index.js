@@ -39,6 +39,14 @@ app.use((req, res, next) => {
 // HTTP compression
 app.use(compression())
 
+// render form
+app.get('/', (req, res) => {
+  res.render('form', {
+    title: 'Parse HTTP GET data',
+    data: req.query
+  })
+})
+
 // Home page route
 app.get('/', (req, res) => {
   res.render('message', { title: 'Hello world!' })
