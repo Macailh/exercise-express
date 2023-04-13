@@ -13,7 +13,8 @@ const cfg = {
   dir: {
     root: __dirname,
     static: __dirname + 'static' + sep,
-    views: __dirname + 'view' + sep
+    views: __dirname + 'view' + sep,
+    routes: __dirname + 'routes' + sep
   }
 }
 
@@ -42,11 +43,15 @@ app.use(compression())
 app.get('/', (req, res) => {
   res.render('message', { title: 'Hello world!' })
 })
+// /hello/ route
+// eslint-disable-next-line import/first
+import { helloRouter } from './routes/hello.js'
+app.use('/hello', helloRouter)
 
-// Another route
-app.get('/hello/', (req, res) => {
-  res.render('message', { title: 'Hello again!' })
-})
+// /goodbye/ route
+// eslint-disable-next-line import/first
+import { goodbyeRouter } from './routes/goodbye.js'
+app.use('/goodbye', goodbyeRouter)
 
 // Params route
 app.get('/user/:id', (req, res) => {
