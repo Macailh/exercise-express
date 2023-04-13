@@ -30,6 +30,9 @@ app.disable('x-powered-by')
 app.set('view engine', 'ejs')
 app.set('views', cfg.dir.views)
 
+// body parsing
+app.use(express.urlencoded({ extended: true }))
+
 // log every request ot the terminal
 app.use((req, res, next) => {
   console.log(req.url)
@@ -38,14 +41,6 @@ app.use((req, res, next) => {
 
 // HTTP compression
 app.use(compression())
-
-// render form
-app.get('/', (req, res) => {
-  res.render('form', {
-    title: 'Parse HTTP GET data',
-    data: req.query
-  })
-})
 
 // Home page route
 app.get('/', (req, res) => {
@@ -72,6 +67,26 @@ app.get('/author/:name/book/:bookName', (req, res, next) => {
   console.log(`author: ${req.params.bookName}`)
 
   next()
+})
+
+// render form
+// app.get('/form', (req, res) => {
+//   res.render('form', {
+//     title: 'Parse HTTP GET data',
+//     data: req.query
+//   })
+// })
+
+// use .all to handle initial GET and POST
+app.all('/form', (req, res, next) => {
+  if (req.method === 'GET' || req.method === 'POST') {
+    res.render('form', {
+      title: 'Parse HTTP POST data',
+      data: req.body
+    })
+  } else {
+    next()
+  }
 })
 
 // Serve static assets
